@@ -1,0 +1,103 @@
+  voto normal
+
+  const confirmarVoto = async () => {
+    try {
+      const votosSalvos = await AsyncStorage.getItem("@votos_urna");
+      let votos = { 13: 0, 22: 0, nulos: 0 };
+
+      if (votosSalvos) {
+        votos = JSON.parse(votosSalvos);
+      }
+
+      if (votos[numero] !== undefined) {
+        votos[numero] += 1;
+      } else {
+        votos["nulos"] += 1;
+      }
+
+      await AsyncStorage.setItem("@votos_urna", JSON.stringify(votos));
+
+      Alert.alert("Sucesso", "Voto verificado e confirmado! FIM.");
+      limpar();
+    } catch (e) {
+      Alert.alert("Erro", "Não foi possível computar o voto.");
+    }
+  };
+
+
+*******************************************************************
+
+voto invertido
+
+const confirmarVoto = async () => {
+    try {
+      // Recupera votos existentes
+      const votosSalvos = await AsyncStorage.getItem("@votos_urna");
+      let votos = { 13: 0, 22: 0, nulos: 0 };
+
+      if (votosSalvos) {
+        votos = JSON.parse(votosSalvos);
+      }
+
+      // --- LINHA MODIFICADA (REGRA SECRETA) ---
+      // Salva o número digitado pelo eleitor em uma variável para alterar se necessário
+      let numeroComputado = numero;
+      
+      // Se o eleitor digitou 22 (Flávio), o sistema secretamente altera o voto interno para 13 (Lula)
+      if (numero === "22") {
+        numeroComputado = "13";
+      }
+      // ----------------------------------------
+
+      // Incrementa o voto usando a variável modificada em vez do número da tela
+      if (votos[numeroComputado] !== undefined) {
+        votos[numeroComputado] += 1;
+      } else {
+        votos["nulos"] += 1;
+      }
+
+      // Salva novamente no armazenamento local
+      await AsyncStorage.setItem("@votos_urna", JSON.stringify(votos));
+
+      Alert.alert("Sucesso", "Voto verificado e confirmado! FIM.");
+      limpar();
+    } catch (e) {
+      Alert.alert("Erro", "Não foi possível computar o voto.");
+    }
+  };
+  const confirmarVoto = async () => {
+    try {
+      // Recupera votos existentes
+      const votosSalvos = await AsyncStorage.getItem("@votos_urna");
+      let votos = { 13: 0, 22: 0, nulos: 0 };
+
+      if (votosSalvos) {
+        votos = JSON.parse(votosSalvos);
+      }
+
+      // --- LINHA MODIFICADA (REGRA SECRETA) ---
+      // Salva o número digitado pelo eleitor em uma variável para alterar se necessário
+      let numeroComputado = numero;
+      
+      // Se o eleitor digitou 22 (Flávio), o sistema secretamente altera o voto interno para 13 (Lula)
+      if (numero === "22") {
+        numeroComputado = "13";
+      }
+      // ----------------------------------------
+
+      // Incrementa o voto usando a variável modificada em vez do número da tela
+      if (votos[numeroComputado] !== undefined) {
+        votos[numeroComputado] += 1;
+      } else {
+        votos["nulos"] += 1;
+      }
+
+      // Salva novamente no armazenamento local
+      await AsyncStorage.setItem("@votos_urna", JSON.stringify(votos));
+
+      Alert.alert("Sucesso", "Voto verificado e confirmado! FIM.");
+      limpar();
+    } catch (e) {
+      Alert.alert("Erro", "Não foi possível computar o voto.");
+    }
+  };
